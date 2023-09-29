@@ -25,20 +25,20 @@ const server = http.createServer((req, res) => {
         // data 를 읽는다 주의점) data 를 다 읽고 다음 데이터를 읽음 -> 다 읽었으면 "end" 메소드를 실행
         // "data" 메소드를 사용하여 POST 데이터가 들어오면 chunk 를 사용하여 body 에 저장함
         req.on("data", (chunk) =>{
-            console.log(chunk);
             body.push(chunk);
         } )
-        req.on("end", () => {
+        return req.on("end", () => {
             const parsedBody = Buffer.concat(body).toString();
             const message = parsedBody.split("=")[1];
-            fs.appendFileSync("message.txt", message);
 
-            console.log(parsedBody);
+            // Exception 처리 writeFile(path, msg, Exception)
+            fs.writeFile("message.txt", message, (err) => {
+                res.statusCode = 302;
+                res.setHeader('Location', '/');
+
+                return res.end();
+            });
         })
-
-        res.statusCode = 302;
-        res.setHeader('Location', '/')
-        return res.end();
     }
     res.setHeader('Content-Type', 'text/html');
     res.write('<html lang="eng">');

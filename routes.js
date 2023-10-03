@@ -11,6 +11,7 @@ const requestHandler = (req, res) => {
         res.write('<head><title>My First Page</title></head>');
         res.write('<body><h1><form action="/message" method="POST"><input type="text" name="message"><button type="submit">Send</button></form></h1></body>');
         res.write('</html>');
+
         return res.end();
 
     }
@@ -20,9 +21,9 @@ const requestHandler = (req, res) => {
         // 특정 이벤트를 들을 수 있다. ( ex. close, data, end, error, readable )
         // data 를 읽는다 주의점) data 를 다 읽고 다음 데이터를 읽음 -> 다 읽었으면 "end" 메소드를 실행
         // "data" 메소드를 사용하여 POST 데이터가 들어오면 chunk 를 사용하여 body 에 저장함
-        req.on("data", (chunk) =>{
+        req.on("data", (chunk) => {
             body.push(chunk);
-        } )
+        })
         return req.on("end", () => {
             const parsedBody = Buffer.concat(body).toString();
             const message = parsedBody.split("=")[1];

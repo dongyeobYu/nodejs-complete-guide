@@ -4,14 +4,11 @@
 const http = require('http');
 const routes = require('./routes.js');
 
-console.log(routes.someText);
-console.log(routes.handler);
-
 const server = http.createServer(routes.handler);
-    /**
-     * createServer 종료
-     * */
-    //process.exit();
+/**
+ * createServer 종료
+ * */
+//process.exit();
 
 
 /**

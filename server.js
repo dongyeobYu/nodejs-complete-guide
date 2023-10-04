@@ -2,9 +2,8 @@
  * http 경로를 가져옴
  * */
 const http = require('http');
-const routes = require('./routes.js');
 
-const server = http.createServer(routes.handler);
+const server = http.createServer();
 /**
  * createServer 종료
  * */

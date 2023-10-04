@@ -3,7 +3,11 @@
  * */
 const http = require('http');
 
-const server = http.createServer();
+const express = require('express');
+
+const app = express();
+
+const server = http.createServer(app);
 /**
  * createServer 종료
  * */

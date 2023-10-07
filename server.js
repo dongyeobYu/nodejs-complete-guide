@@ -7,6 +7,25 @@ const express = require('express');
 
 const app = express();
 
+/**
+ * 미들웨어 함수 추가 가능
+ * 스프링의 인터셉터와 비슷, 들어오는 요청마다 실행
+ * @param req, res, next
+ * */
+app.use((req, res, next) => {
+    console.log('In the middleware');
+
+    // next() 를 호출해야 다음 미들웨어를 실행, 안할 시 멈춤
+    next();
+});
+
+app.use((req, res, next) => {
+    console.log('In another middleware');
+
+    // ...
+    res.send('<h1>Hello Express! </h1>')
+});
+
 const server = http.createServer(app);
 /**
  * createServer 종료

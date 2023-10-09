@@ -4,6 +4,7 @@
 // const http = require('http');
 
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -17,14 +18,22 @@ const app = express();
 //
 //     // next() 를 호출해야 다음 미들웨어를 실행, 안할 시 멈춤
 //     next();
+
+// from 으로 들어오는 body 를 분석해서 보여줌
+app.use(bodyParser.urlencoded({extends: false}));
+
 app.use('/app-product', (req, res, next) => {
-    console.log('In another middleware');
-    res.send('<h1>Hello Express! App-product </h1>')
+    res.send("<form action='/product' method='POST'><input type='text' name='title'><button type='submit'> Add product </button></form>")
 });
-// });
+
+app.use('/product', (req, res, next) => {
+
+    // {Key: Value} 형식으로 가져옴
+    console.log(req.body);
+    res.redirect("/");
+})
 
 app.use('/', (req, res, next) => {
-    console.log('In another middleware');
     res.send('<h1>Hello Express! </h1>')
 });
 

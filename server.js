@@ -4,9 +4,13 @@
 // const http = require('http');
 
 const express = require('express');
-const bodyParser = require('body-parser');
-
 const app = express();
+
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
+
+app.use(adminRoutes);
+app.use(shopRoutes)
 
 /**
  * 미들웨어 함수 추가 가능
@@ -18,25 +22,6 @@ const app = express();
 //
 //     // next() 를 호출해야 다음 미들웨어를 실행, 안할 시 멈춤
 //     next();
-
-// from 으로 들어오는 body 를 분석해서 보여줌
-app.use(bodyParser.urlencoded({extends: false}));
-
-app.use('/app-product', (req, res, next) => {
-    res.send("<form action='/product' method='POST'><input type='text' name='title'><button type='submit'> Add product </button></form>")
-});
-
-// app.post() => POST 요청만 받음 <==> app.get() , post, get, put, patch, delete 전부 가능
-app.post('/product', (req, res, next) => {
-
-    // {Key: Value} 형식으로 가져옴
-    console.log(req.body);
-    res.redirect("/");
-})
-
-app.use('/', (req, res, next) => {
-    res.send('<h1>Hello Express! </h1>')
-});
 
 
 // createServer() + listen 동시에 가능 *express 기능

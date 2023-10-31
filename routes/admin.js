@@ -2,12 +2,13 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const router = express.Router();
+const rootDir = require('../util/path');
 
 router.use(bodyParser.urlencoded({extends: false}));
 
 
 router.get('/add-product', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../', 'views', 'add-product.html'));
+    res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
 });
 
 // app.post() => POST 요청만 받음 <==> app.get() , post, get, put, patch, delete 전부 가능

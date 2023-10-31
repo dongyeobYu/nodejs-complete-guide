@@ -10,7 +10,13 @@ const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 app.use(adminRoutes);
-app.use(shopRoutes)
+app.use(shopRoutes);
+
+// Error Page
+app.use((req, res, next) => {
+    // status() - 리턴 할 상태값
+    res.status(404).send('<h1>Page not Found</h1>');
+})
 
 /**
  * 미들웨어 함수 추가 가능

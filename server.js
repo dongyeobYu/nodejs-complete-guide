@@ -9,7 +9,8 @@ const app = express();
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
-app.use(adminRoutes);
+// /admin 기본경로 추가 ex) localhost:8080/admin/product
+app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 // Error Page

@@ -7,16 +7,20 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-const adminRoutes = require('./routes/admin');
+const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.urlencoded({extends: false}));
+app.use(express.static(path.join(__dirname, 'public')))
+
 
 // /admin 기본경로 추가 ex) localhost:8080/admin/product
-app.use('/admin', adminRoutes);
+app.use('/admin', adminData.routes);
 app.use(shopRoutes);
 
 // 정적 파일 사용 ( ex.CSS )
 // __dirname => server.js 의 경로 , public -> public 폴더를 바라봄
-app.use(express.static(path.join(__dirname, 'public')))
 
 // Error Page
 app.use((req, res, next) => {

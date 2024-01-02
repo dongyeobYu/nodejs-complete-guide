@@ -14,6 +14,10 @@ const shopRoutes = require('./routes/shop');
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
+// 정적 파일 사용 ( ex.CSS )
+// __dirname => server.js 의 경로 , public -> public 폴더를 바라봄
+app.use(express.static(path.join(__dirname, 'public')))
+
 // Error Page
 app.use((req, res, next) => {
     // status() - 리턴 할 상태값

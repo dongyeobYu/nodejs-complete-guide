@@ -7,6 +7,11 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
+// view engine = pug 를 사용
+app.set('view engine', 'pug');
+// views = 템플릿을 사용할 경로 -> default - views
+app.set('views', 'views');
+
 const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const bodyParser = require("body-parser");
